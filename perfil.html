@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Perfil</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-slate-900 text-slate-100 font-sans p-6 flex flex-col items-center justify-start md:justify-center">
+  <!-- Contenedor Principal -->
+  <div class="w-full max-w-2xl bg-slate-800 rounded-2xl shadow-xl border border-slate-700/50 p-8 space-y-8">
+    <!-- Barra de Navegación Simple Superior -->
+    <div class="flex justify-between items-center border-b border-slate-700/50 pb-4">
+      <div class="flex items-center gap-2">
+        <div class="w-3 h-3 rounded-full bg-emerald-400"></div>
+        <span class="font-semibold text-slate-200">Área Personal</span>
+      </div>
+      <!-- Botón para regresar al Dashboard principal -->
+      <a href="dashboard.html" class="text-sm font-medium text-emerald-400 hover:text-emerald-300 transition flex items-center gap-1">
+        ← Volver al Tablero
+      </a>
+    </div>
+    <!-- Sección 1: Identificación y Tipo de Fumador (Psicológico) -->
+    <div class="bg-gradient-to-br from-slate-850 to-slate-900 p-6 rounded-xl border border-slate-700/40 space-y-4">
+      <div class="flex items-center gap-4">
+        <!-- Avatar minimalista con inicial -->
+        <div class="w-14 h-14 rounded-full bg-emerald-600/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl font-black shadow-inner shadow-emerald-500/10">
+          <span id="avatar-inicial">U</span>
+        </div>
+        <div>
+          <p class="text-xs font-semibold tracking-wider text-slate-400 uppercase">Expediente de</p>
+          <h2 id="perfil-nombre" class="text-2xl font-extrabold text-white">Cargando...</h2>
+        </div>
+      </div>
+      <div class="border-t border-slate-700/30 pt-4 space-y-1.5">
+        <span class="inline-block bg-teal-500/10 text-teal-400 border border-teal-500/20 text-xs font-bold px-2.5 py-1 rounded-md uppercase tracking-wide">
+          Perfil Psicológico
+        </span>
+        <h3 id="perfil-tipo" class="text-lg font-bold text-slate-200 mt-1">Cargando análisis...</h3>
+        <p id="perfil-desc" class="text-sm text-slate-400 leading-relaxed">
+          Procesando las respuestas de tu encuesta contextual y emocional...
+        </p>
+      </div>
+    </div>
+    <!-- Sección 2: Métricas Iniciales del Hábito (Datos base) -->
+    <div class="space-y-3">
+      <h3 class="text-sm font-semibold tracking-wider text-slate-400 uppercase">Configuración de tu Hábito Base</h3>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <!-- Tarjeta: Consumo Reportado -->
+        <div class="bg-slate-750 p-4 rounded-xl border border-slate-700/30 flex justify-between items-center">
+          <div>
+            <p class="text-xs text-slate-400 font-medium">Consumo diario original</p>
+            <p id="perfil-cantidad" class="text-xl font-bold text-white mt-0.5">0 cigarrillos</p>
+          </div>
+          <span class="text-xl">🚬</span>
+        </div>
+
+        <!-- Tarjeta: Gasto Estimado -->
+        <div class="bg-slate-750 p-4 rounded-xl border border-slate-700/30 flex justify-between items-center">
+          <div>
+            <p class="text-xs text-slate-400 font-medium">Costo unitario calculado</p>
+            <p id="perfil-costo" class="text-xl font-bold text-white mt-0.5">$0 COP</p>
+          </div>
+          <span class="text-xl">💵</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sección 3: Opciones Avanzadas / Reset (Actualizado) -->
+    <div class="border-t border-slate-700/50 pt-6 space-y-4">
+      <div class="space-y-0.5">
+        <h4 class="text-sm font-bold text-slate-300">Zona de Control y Ajustes</h4>
+        <p class="text-xs text-slate-500">Gestiona los datos de tu cuenta y el estado de tu progreso actual.</p>
+      </div>
+      
+      <!-- Contenedor de Botones de Acción -->
+      <div class="flex flex-col sm:flex-row gap-3">
+        <!-- Botón para Cambiar Perfil (Conserva progreso) -->
+        <button 
+          id="btn-reacer-test"
+          class="flex-1 bg-slate-700 hover:bg-slate-650 text-amber-400 border border-amber-500/20 font-semibold py-2.5 px-4 rounded-xl text-xs md:text-sm transition active:scale-[0.98] whitespace-nowrap"
+        >
+          🔄 Repetir Evaluación Psicológica
+        </button>
+
+        <button 
+          id="btn-reinicio-total"
+          class="flex-1 bg-rose-950/40 hover:bg-rose-900/60 text-rose-400 border border-rose-500/30 font-semibold py-2.5 px-4 rounded-xl text-xs md:text-sm transition active:scale-[0.98] whitespace-nowrap"
+        >
+          🗑️ Borrar Todo y Empezar de Cero
+        </button>
+      </div>
+    </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const nombre = localStorage.getItem('user_nombre') || 'Usuario';
+      const cantidad = Number(localStorage.getItem('user_cantidad_diaria')) || 0;
+      const costo = Number(localStorage.getItem('user_costo_cigarrillo')) || 0;
+      
+      const tipoFumador = localStorage.getItem('perfil_tipo') || 'Fumador en Evaluación';
+      const descFumador = localStorage.getItem('perfil_descripcion') || 'Aún no has completado el test de entorno y emociones.';
+
+      document.getElementById('perfil-nombre').innerText = nombre;
+      document.getElementById('avatar-inicial').innerText = nombre.charAt(0).toUpperCase();
+      document.getElementById('perfil-tipo').innerText = tipoFumador;
+      document.getElementById('perfil-desc').innerText = descFumador;
+      document.getElementById('perfil-cantidad').innerText = `${cantidad} cigarrillos / día`;
+      document.getElementById('perfil-costo').innerText = `$${costo.toLocaleString('es-CO')} COP`;
+
+      document.getElementById('btn-reacer-test').addEventListener('click', () => {
+        if(confirm('¿Quieres volver a realizar el test de perfilación psicológica? Tus estadísticas de cigarrillos evitados y dinero ahorrado se mantendrán intactas.')) {
+          window.location.href = 'test.html';
+        }
+      });
+
+      document.getElementById('btn-reinicio-total').addEventListener('click', () => {
+        const primeraConfirmacion = confirm('⚠ ¿Estás seguro de que deseas borrar absolutamente todos tus datos? Esta acción eliminará tu progreso, días limpios, dinero ahorrado y perfil.');
+        
+        if (primeraConfirmacion) {
+          const segundaConfirmacion = confirm('🛑 Esta acción es irreversible y tu expediente se destruirá por completo. ¿Deseas continuar?');
+          
+          if (segundaConfirmacion) {
+            localStorage.clear();
+            
+            window.location.href = 'test.html';
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
