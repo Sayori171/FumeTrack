@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configura tu Camino - Resiliencia</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-slate-900 text-slate-100 font-sans p-6 flex items-center justify-center">
+
+  <!-- Tarjeta del Formulario -->
+  <div class="w-full max-w-md bg-slate-800 rounded-2xl shadow-xl border border-slate-700/50 p-8 space-y-6">
+    
+    <!-- Encabezado -->
+    <div class="space-y-2">
+      <h1 class="text-2xl font-bold text-emerald-400">Personaliza tu proceso</h1>
+      <p class="text-slate-400 text-sm">
+        Necesitamos un par de datos para calcular el impacto real en tus pulmones y en tu bolsillo.
+      </p>
+    </div>
+
+    <!-- Formulario -->
+    <form id="form-encuesta" class="space-y-5">
+    <!-- Pregunta 1: Nombre -->
+    <div class="space-y-2">
+        <label for="input-nombre" class="block text-sm font-medium text-slate-300">¿Cómo te llamas?</label>
+        <input 
+        type="text" 
+        id="input-nombre" 
+        required
+        placeholder="Ej. Natt" 
+        class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition"
+        >
+    </div>
+    <!-- Pregunta 2: Cigarrillos al día -->
+    <div class="space-y-2">
+        <label for="input-cantidad" class="block text-sm font-medium text-slate-300">¿Cuántos cigarrillos fumas al día habitualmente?</label>
+        <input 
+        type="number" 
+        id="input-cantidad" 
+        min="1" 
+        required
+        placeholder="Ej. 10" 
+        class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition"
+        >
+    </div>
+    <!-- Pregunta 3: Precio del paquete -->
+    <div class="space-y-2">
+        <label class="block text-sm font-medium text-slate-300">¿Cuánto te cuesta una cajetilla/paquete entero?</label>
+        <div class="flex gap-3">
+        <input 
+            type="number" 
+            id="input-precio" 
+            min="100" 
+            required
+            placeholder="Precio total (ej. 7000)" 
+            class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition"
+        >
+        <input 
+            type="number" 
+            id="input-unidades" 
+            min="1" 
+            required
+            placeholder="¿Trae? (ej. 20)" 
+            class="w-32 bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition"
+        >
+        </div>
+    </div>
+    <!-- Botón de Envío -->
+    <button 
+        type="submit"
+        class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-3.5 px-6 rounded-xl transition duration-200 shadow-lg shadow-emerald-900/20 active:scale-[0.98] mt-2"
+    >
+        Comenzar mi camino
+    </button>
+    </form>
+  </div>
+  <script src="./js/encuesta.js">
+  </script>
+</body>
+</html>
